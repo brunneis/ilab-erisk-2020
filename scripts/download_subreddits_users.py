@@ -14,7 +14,7 @@ def loop(id, post_type, subreddit, start_timestamp, stop_timestamp, write_lock, 
     ids = set()
     prev_ids_len = 0
 
-    no_new_users_stop_count = 100
+    no_new_users_loop_limit = 100
 
     while start_timestamp < stop_timestamp:
         url = f'https://api.pushshift.io/reddit/search/{post_type}/?subreddit={subreddit}&sort=asc&sort_type=created_utc&size=1000'
@@ -31,9 +31,8 @@ def loop(id, post_type, subreddit, start_timestamp, stop_timestamp, write_lock, 
                                      }).json()['data']
                 done = True
             except Exception:
-                print(f'Could not retrieve {url}, retrying...')
-                time.sleep(5)
-                pass
+                # print(f'Could not retrieve {url}, retrying...')
+                time.sleep(1)
 
         for post in posts:
             if post['author'] in ids:
@@ -45,9 +44,9 @@ def loop(id, post_type, subreddit, start_timestamp, stop_timestamp, write_lock, 
 
         # No new users
         if prev_ids_len == len(ids):
-            if no_new_users_stop_count == 0:
+            if no_new_users_loop_limit == 0:
                 break
-            no_new_users_stop_count -= 1
+            no_new_users_loop_limit -= 1
         prev_ids_len = len(ids)
 
         try:
