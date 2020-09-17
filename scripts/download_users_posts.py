@@ -119,7 +119,7 @@ if __name__ == "__main__":
 
     users_file = sys.argv[1]
     subreddit = ''.join(''.join(users_file.split('/')[-1]).split('_users.txt')[:-1])
-    base_dir = f'posts_by_user/{subreddit}'
+    base_dir = f'posts-by-user/{subreddit}'
 
     try:
         os.mkdir(base_dir)

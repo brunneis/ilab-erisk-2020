@@ -66,7 +66,7 @@ def extract_users(subreddit):
                               interval_length))
     print(start_points[:-1])
 
-    base_dir = 'subreddits_users'
+    base_dir = 'subreddits-users'
     try:
         os.mkdir(base_dir)
     except FileExistsError:
