@@ -7,7 +7,6 @@ from threading import Thread, Lock
 import yaml
 import os
 
-# Crear locks si se usa más de un hilo por tipo de post
 NUM_THREADS_PER_SUBREDDIT_POST_TYPE = 20
 
 
